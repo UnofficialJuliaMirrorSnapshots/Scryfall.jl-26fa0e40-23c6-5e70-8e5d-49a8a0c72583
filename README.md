@@ -1,10 +1,11 @@
 # Scryfall.jl
-*A Julia wrapper for basic functionality of https://scryfall.com --- a MtG all-in-one look-up site.*
+A Julia Scryfall.com Api wapper
+[check out api](https://Scryfall.com) api.
+
 
 | **Build Status**                                                                                |
 |:-----------------------------------------------------------------------------------------------:|
-| [![Build Status](https://travis-ci.org/Moelf/Scryfall.jl.svg?branch=master)](https://travis-ci.org/Moelf/Scryfall.jl)|
-
+|[![Build Status](https://travis-ci.org/Moelf/Scryfall.jl.svg?branch=master)](https://travis-ci.org/Moelf/Scryfall.jl)|
 
 ## Installation
 
@@ -14,18 +15,27 @@ julia> Pkg.add("Scryfall")
 ```
 
 ## Basic Usage
-
-
 ```julia
-using Scryfall
+julia> import Scryfall
 
-getOracle("Black lotus")
-#"{T}, Sacrifice Black Lotus: Add three mana of any one color."
+julia> Scryfall.getRaw("lightning bol")
+Dict{String,Any} with 56 entries:
+  "foil"             => true
+  "mtgo_foil_id"     => 67197
+  "purchase_uris"    => Dict{String,Any}("cardhoarder"=>"https://www.cardhoarder.com/cards/67…
+  "oracle_text"      => "Lightning Bolt deals 3 damage to any target."
+  "scryfall_set_uri" => "https://scryfall.com/sets/a25?utm_source=api"
+  "collector_number" => "141"
+  "set"              => "a25"
+  "lang"             => "en"
+  ...
 
-getImgurl("Black lotus")
-# "https://img.scryfall.com/cards/normal/en/vma/4.jpg?1517813031"
+julia> Scryfall.getImgurl("lightning bolt")
+"https://img.scryfall.com/cards/normal/front/e/3/e3285e6b-3e79-4d7c-bf96-d920f973b122.jpg?1562442158"
 
-getImgurl("Black lotus",setCode="LEB")
-"https://img.scryfall.com/cards/normal/en/leb/233.jpg?1525123053"
-
+julia> Scryfall.getImgurl("lightning bolt", setCode="PRM")
+"https://img.scryfall.com/cards/normal/front/4/0/404a819c-8b9a-4527-a312-5e0df9c27be0.jpg?1562544239"
 ```
+## To-Do
+- [ ] More fuzzy search, potentially from google or somewhere
+- [ ] Show all avaliable set code for a given card
